@@ -1,13 +1,22 @@
 import { Text, View, StyleSheet, Image, Pressable, Platform } from "react-native";
-import MealDetail from "./MealDetails";
+import MealDetail from "../MealDetails";
+import { useNavigation } from "@react-navigation/native";
 
-export default function MealItem({ title, imageUrl, affordability, complexity, duration, onPress }) {
+export default function MealItem({ title, imageUrl, affordability, complexity, duration, id }) {
+  const navigation = useNavigation()
+
+  const pressHandler = () => {
+    navigation.navigate("MealDetail", {
+      mealId: id
+    })
+  }
+
   return (
     <View style={styles.mealItem}>
       <Pressable
         android_ripple={{ color: '#ccc' }}
         style={({ pressed }) => pressed ? styles.buttonPressed : null}
-        onPress={onPress}
+        onPress={pressHandler}
       >
 
         <View style={styles.innerContainer}>
